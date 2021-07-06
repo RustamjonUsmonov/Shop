@@ -21,4 +21,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/products', [App\Http\Controllers\ProductController::class, 'index'])->name('products-list');
+Route::middleware('auth')/*->prefix('shop')*/->group(function () {
+    Route::get('/products', [App\Http\Controllers\ProductController::class, 'index'])
+        ->name('products-list');
+});
